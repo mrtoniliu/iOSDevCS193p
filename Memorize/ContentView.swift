@@ -21,7 +21,8 @@ struct ContentView: View {
         // Passdown these functions to Views in ZStack
             .padding()
             .foregroundColor(Color.orange)
-            .font(Font.largeTitle)
+            .font(gameModel.cards.count > 8 ? Font.body : Font.largeTitle)
+            .aspectRatio(3/2, contentMode: /*@START_MENU_TOKEN@*/.fit/*@END_MENU_TOKEN@*/)
     }
 }
 
