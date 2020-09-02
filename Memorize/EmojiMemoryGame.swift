@@ -11,9 +11,10 @@ func createCardContent(pairIndex: Int) -> String {
     return "Hello"
 }
 
-class EmojiMemoryGame {
-    
-    private var game: MemoryGame<String>  = EmojiMemoryGame.createMemoryGame()// -> cannot be access by others
+class EmojiMemoryGame: ObservableObject {
+    // @Published -> property wrapper
+    // if game changed, it will send to observer
+    @Published private var game: MemoryGame<String>  = EmojiMemoryGame.createMemoryGame()// -> cannot be access by others
         
     // The function of type.
     static func createMemoryGame() -> MemoryGame<String> {
@@ -22,8 +23,9 @@ class EmojiMemoryGame {
             return emojis[pairIndex]
         }
     }
-    
 //    private(set) var game: MemoryGame<String> -> only Modified by EmojiMemoryGame
+    
+//    var objectWillChange: ObservableObjectPublisher
     
     // MARK: - Access to the model
     var cards: Array<MemoryGame<String>.Card> {
@@ -33,7 +35,7 @@ class EmojiMemoryGame {
     // MARK: - Intent(s)
     
     func choose(card: MemoryGame<String>.Card) {
-        game.choose(card: card)
+        game.choose(card)
     }
     
 }

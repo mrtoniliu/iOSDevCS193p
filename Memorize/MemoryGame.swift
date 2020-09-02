@@ -10,8 +10,10 @@ import Foundation
 struct MemoryGame<CardContent> {
     var cards: Array<Card>
 
-    func choose(card: Card) {
+    mutating func choose(_ card: Card) {
         print("card chosen: \(card)")
+        let chosenIndex: Int = index(of: card)
+        cards[chosenIndex].flip()
     }
     
     init(numberOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent) {
@@ -24,10 +26,23 @@ struct MemoryGame<CardContent> {
         cards.shuffle()
     }
     
+    func index(of card: Card) -> Int { // (external name internal name: Card)
+        for index in 0..<cards.count {
+            if cards[index].id == card.id {
+                return index
+            }
+        }
+        return 0 // TODO: Need to fix this
+    }
+    
     struct Card: Identifiable{
         var isFaceUp: Bool = true
         var isMatched: Bool = false
         var content: CardContent // can be decided when create game
         var id: Int
+        
+        mutating func flip() {
+            isFaceUp = !isFaceUp
+        }
     }
 }
