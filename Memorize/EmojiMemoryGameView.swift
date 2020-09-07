@@ -11,15 +11,22 @@ struct EmojiMemoryGameView: View {
     @ObservedObject var gameModel : EmojiMemoryGame
         
     var body: some View {
-        Grid(gameModel.cards) { card in
-                CardView(card: card).onTapGesture(perform: {
-                    gameModel.choose(card: card)
-                })
-                .padding(5)
+        VStack{
+            Text("Theme: \(gameModel.theme.name)")
+            Grid(gameModel.cards) { card in
+                    CardView(card: card).onTapGesture(perform: {
+                        gameModel.choose(card: card)
+                    })
+                    .padding(5)
+            }
+            HStack{
+                Text("Score: \(gameModel.score)")
+            Spacer()
+            Button("New Game"){ action: do {gameModel.newGame()}}
+            }
         }
-        // Passdown these functions to Views in ZStack
-            .padding()
-            .foregroundColor(Color.orange)
+        .padding()
+        .foregroundColor(gameModel.theme.color)
     }
 }
 
@@ -57,3 +64,5 @@ struct ContentView_Previews: PreviewProvider {
         EmojiMemoryGameView(gameModel: EmojiMemoryGame())
     }
 }
+
+
