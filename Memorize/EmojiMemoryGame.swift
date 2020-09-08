@@ -17,7 +17,7 @@ class EmojiMemoryGame: ObservableObject {
     @Published private var game: MemoryGame<String>  = EmojiMemoryGame.createMemoryGame()// -> cannot be access by others
         
     // The function of type.
-    static func createMemoryGame() -> MemoryGame<String> {
+    private static func createMemoryGame() -> MemoryGame<String> {
         let emojis: Array<String> = ["👻", "🎃", "🍬", "💡", "🎇"]
         return MemoryGame<String>(numberOfPairsOfCards: Int.random(in: 2...5)  ){ pairIndex in
             return emojis[pairIndex]

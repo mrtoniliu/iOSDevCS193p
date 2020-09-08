@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct Grid<Item, ItemView>: View where Item: Identifiable, ItemView: View { // Connecting Generics to protocol
-    var items: [Item]
-    var viewForItem: (Item) -> ItemView
+    private var items: [Item]
+    private var viewForItem: (Item) -> ItemView
     
     // The function `(Item) -> ItemView` will not be called in the init
     // So use @escapting before the function
@@ -24,7 +24,7 @@ struct Grid<Item, ItemView>: View where Item: Identifiable, ItemView: View { // 
         }
     }
     
-    func body(for layout: GridLayout) -> some View {
+    private func body(for layout: GridLayout) -> some View { // body helper function
         ForEach(items) { item in
             self.body(for: item, in: layout)
         }
