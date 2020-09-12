@@ -38,4 +38,8 @@ class EmojiMemoryGame: ObservableObject {
         game.choose(card)
     }
     
+    func resetGame() {
+        game = EmojiMemoryGame.createMemoryGame()
+    }
+    
 }
